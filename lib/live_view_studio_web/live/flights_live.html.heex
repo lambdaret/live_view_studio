@@ -1,0 +1,63 @@
+<h1>Find a Flight</h1>
+<div>
+  <form phx-submit="number-search">
+    <input
+      type="text"
+      name="number"
+      value={@number}
+      placeholder="Flight number"
+      autofocus
+      autocomplete="off"
+      readonly={@loading}
+    />
+  </form>
+
+  <form
+    phx-submit="airport-code-search"
+    phx-change="suggest-airport-code"
+  >
+    <input
+      type="text"
+      name="code"
+      value={@code}
+      placeholder="Airport code"
+      autocomplate="off"
+      list="airport-codes"
+      readonly={@loading}
+    />
+  </form>
+  <datalist id="airport-codes">
+    <%= for code <- @airport_codes do %>
+      <option value={code}><%= code %></option>
+    <% end %>
+  </datalist>
+
+  <%= if @loading do %>
+    <div class="loader">Loading...</div>
+  <% end %>
+  <div class="flights">
+    <ul>
+      <%= for flight <- @flights do %>
+        <li>
+          <div class="first-line">
+            <div class="number">
+              Flight # <%= flight.number %>
+            </div>
+            <div class="origin-destination">
+              <img src="images/location.svg" class="w-8 h-8" />
+              <%= flight.origin %> to <%= flight.destination %>
+            </div>
+          </div>
+          <div class="second-line">
+            <div class="departs">
+              Departs: <%= format(flight.departure_time) %>
+            </div>
+            <div class="arrives">
+              Arrives: <%= format(flight.arrival_time) %>
+            </div>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
