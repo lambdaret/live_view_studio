@@ -44,20 +44,20 @@
     <div class="footer">
       <div class="pagination">
         <%= if @options.page > 1 do %>
-          <.link href={
+          <.link patch={
             ~p"/paginate?page=#{@options.page - 1}&per_page=#{@options.per_page}"
           }>
             Previous
           </.link>
         <% end %>
         <%= for i <- (@options.page - 2)..(@options.page + 2), i > 0 do %>
-          <.link href={
+          <.link patch={
             ~p"/paginate?page=#{i}&per_page=#{@options.per_page}"
           }>
             <%= i %>
           </.link>
         <% end %>
-        <.link href={
+        <.link patch={
           ~p"/paginate?page=#{@options.page + 1}&per_page=#{@options.per_page}"
         }>
           Next
