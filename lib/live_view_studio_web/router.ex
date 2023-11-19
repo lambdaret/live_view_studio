@@ -32,7 +32,7 @@ defmodule LiveViewStudioWeb.Router do
     live "/vehicles", VehiclesLive
     live "/sort", SortLive
     live "/volunteers", VolunteersLive
-    # live "/infinite-scroll", InfiniteScrollLive
+    live "/infinite-scroll", InfiniteScrollLive
     # live "/datepicker", DatePickerLive
     # live "/sandbox", SandboxLive
   end
