@@ -18,7 +18,8 @@
       errors={f[:phone]}
       placeholder="Phone"
       autocomplete="off"
-      phx-debounce={2000}
+      phx-debounce="blur"
+      phx-hook="PhoneNumber"
     />
     <button type="submit">
       Check In
