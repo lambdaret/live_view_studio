@@ -1,0 +1,76 @@
+<h1>Food Bank Donations</h1>
+<div id="donations">
+  <form phx-change="select-per-page">
+    Show
+    <select name="per-page">
+      <%= options_for_select([5, 10, 15, 20], @options.per_page) %>
+    </select>
+    <label for="per-page">per page</label>
+  </form>
+  <div class="wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th class="item">
+            <.sort_link text="Item" sort_by={:item} options={@options} />
+          </th>
+          <th class="quantity">
+            <.sort_link
+              text="Quantity"
+              sort_by={:quantity}
+              options={@options}
+            />
+          </th>
+          <th class="days_until_expires">
+            <.sort_link
+              text="Days Until Expires"
+              sort_by={:days_until_expires}
+              options={@options}
+            />
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= for donation <- @donations do %>
+          <tr>
+            <td class="item">
+              <span class="id"><%= donation.id %></span>
+              <%= donation.emoji %> <%= donation.item %>
+            </td>
+            <td>
+              <%= donation.quantity %> lbs
+            </td>
+            <td>
+              <span class={expires_class(donation)}>
+                <%= donation.days_until_expires %>
+              </span>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="footer">
+      <div class="pagination">
+        <%= if @options.page > 1 do %>
+          <.link patch={
+            ~p"/sort?page=#{@options.page - 1}&per_page=#{@options.per_page}"
+          }>
+            Previous
+          </.link>
+        <% end %>
+        <%= for i <- (@options.page - 2)..(@options.page + 2), i > 0 do %>
+          <.link patch={
+            ~p"/sort?page=#{i}&per_page=#{@options.per_page}"
+          }>
+            <%= i %>
+          </.link>
+        <% end %>
+        <.link patch={
+          ~p"/sort?page=#{@options.page + 1}&per_page=#{@options.per_page}"
+        }>
+          Next
+        </.link>
+      </div>
+    </div>
+  </div>
+</div>

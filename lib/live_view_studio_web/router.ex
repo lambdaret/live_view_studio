@@ -30,8 +30,8 @@ defmodule LiveViewStudioWeb.Router do
     live "/servers/new", ServersLive, :new
     live "/paginate", PaginateLive
     live "/vehicles", VehiclesLive
-    # live "/sort", SortLive
-    # live "/volunteers", VolunteersLive
+    live "/sort", SortLive
+    live "/volunteers", VolunteersLive
     # live "/infinite-scroll", InfiniteScrollLive
     # live "/datepicker", DatePickerLive
     # live "/sandbox", SandboxLive
