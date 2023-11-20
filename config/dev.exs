@@ -4,7 +4,7 @@ import Config
 config :live_view_studio, LiveViewStudio.Repo,
   username: "postgres",
   password: "postgres",
-  hostname: "localhost",
+  hostname: "172.17.0.3",
   database: "live_view_studio_2ed_dev",
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
